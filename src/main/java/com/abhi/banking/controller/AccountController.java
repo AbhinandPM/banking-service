@@ -1,6 +1,7 @@
-package com.abhi.banking;
+package com.abhi.banking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,18 +15,20 @@ import com.abhi.util.RestTemplateUtility;
 @RestController
 public class AccountController {
 
-
 	@Autowired
 	private RestTemplateUtility restTemplateUtility;
-	
+
+	@Value("${account.url}")
+	private String accountUrl;
+
 	@PostMapping("/account")
 	public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
-		return restTemplateUtility.postForObject("http://localhost:4000/account", accountDto, AccountDto.class);
+		return restTemplateUtility.postForObject(accountUrl, accountDto, AccountDto.class);
 	}
 
 	@GetMapping("/account/{accountNo}")
 	public ResponseEntity<AccountDto> getAccountDetailsByAccountNo(@PathVariable Long accountNo) {
-		return restTemplateUtility.getForObject("http://localhost:4000/account/" + accountNo, AccountDto.class);
+		return restTemplateUtility.getForObject(accountUrl + "/" + accountNo, AccountDto.class);
 	}
 
 }

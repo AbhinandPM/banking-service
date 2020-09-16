@@ -1,6 +1,7 @@
-package com.abhi.banking;
+package com.abhi.banking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +17,21 @@ public class CustomerController {
 
 	@Autowired
 	private RestTemplateUtility restTemplateUtility;
-	
+
+	@Value("${customer.url}")
+	private String customerUrl;
+
+	@Value("${customerByUsername.url}")
+	private String customerByUsernameUrl;
+
 	@PostMapping("/customer")
 	public ResponseEntity<CustomerDto> registerCustomer(@RequestBody CustomerDto customer) {
-		return restTemplateUtility.postForObject("http://localhost:4000/customer", customer, CustomerDto.class);
+		return restTemplateUtility.postForObject(customerUrl, customer, CustomerDto.class);
 	}
 
-	@GetMapping("/customer/username/{username}")	
+	@GetMapping("/customer/username/{username}")
 	public ResponseEntity<CustomerDto> getCustomerByUsername(@PathVariable String username) {
-		return restTemplateUtility.getForObject("http://localhost:4000/customer/username/" + username, CustomerDto.class);
+		return restTemplateUtility.getForObject(customerByUsernameUrl + username, CustomerDto.class);
 	}
 
 }
