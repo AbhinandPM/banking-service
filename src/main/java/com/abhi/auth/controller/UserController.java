@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abhi.auth.dto.CustomUserDto;
-import com.abhi.auth.service.CustomerUserDetailsService;
+import com.abhi.auth.service.CustomUserDetailsService;
 import com.abhi.util.InvalidInputException;
 
 @RestController
 public class UserController {
 	
 	@Autowired
-	private CustomerUserDetailsService customerUserDetailsService;
+	private CustomUserDetailsService customUserDetailsService;
 
 	@PostMapping("/user/register")
 	public CustomUserDto registerUser(@RequestBody CustomUserDto customUserDto) throws InvalidInputException {
-		customUserDto = customerUserDetailsService.registerUser(customUserDto);
+		customUserDto = customUserDetailsService.registerUser(customUserDto);
 		return customUserDto;
 	}
 	
 	@PostMapping("/adminuser/register")
 	public CustomUserDto registerAdminUser(@RequestBody CustomUserDto customUserDto) throws InvalidInputException {
-		customUserDto = customerUserDetailsService.registerAdminUser(customUserDto);
+		customUserDto = customUserDetailsService.registerAdminUser(customUserDto);
 		return customUserDto;
 	}
 }

@@ -25,7 +25,7 @@ import com.abhi.util.InvalidInputException;
 
 @Service
 @Transactional
-public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomerUserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
 
 	@Autowired
 	private UserRepository userRepo;

@@ -3,7 +3,7 @@ package com.abhi.auth.service;
 import com.abhi.auth.dto.CustomUserDto;
 import com.abhi.util.InvalidInputException;
 
-public interface CustomerUserDetailsService {
+public interface CustomUserDetailsService {
 
 	CustomUserDto registerUser(CustomUserDto customUserDto) throws InvalidInputException;
 

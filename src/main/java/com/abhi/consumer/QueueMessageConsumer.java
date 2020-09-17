@@ -7,7 +7,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import com.abhi.auth.dto.CustomUserDto;
-import com.abhi.auth.service.CustomerUserDetailsService;
+import com.abhi.auth.service.CustomUserDetailsService;
 import com.abhi.customer.dto.CustomerDto;
 import com.abhi.util.InvalidInputException;
 
@@ -17,7 +17,7 @@ public class QueueMessageConsumer {
 	private final Logger logger = LoggerFactory.getLogger(QueueMessageConsumer.class);
 
 	@Autowired
-	private CustomerUserDetailsService userService;
+	private CustomUserDetailsService userService;
 
 	@JmsListener(destination = "${CREATE_CUSTOMER_SUCCESS_QUEUE}")
 	public void listener(CustomerDto customer) {
